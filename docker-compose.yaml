@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  mariadb:
+    image: mariadb:latest
+    volumes:
+      - data:/data/db
+    env_file:
+      - ./env/mariadb.env
+  
