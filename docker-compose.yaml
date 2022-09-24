@@ -3,7 +3,21 @@ services:
   mariadb:
     image: mariadb:latest
     volumes:
-      - data:/data/db
+      - datadir:/var/lib/mysql
     env_file:
       - ./env/mariadb.env
+  backend:
+    image: node:latest
+    volumes:
+      - logs:/app/logs
+      - /app/node_modules
+    ports:
+      - 80:80
+    environment:
+      - MARIADB_USERNAME=mike
+      - MARIADB_PASSWORD=secret
+volumes:
+  datadir:
+  logs:
+
   

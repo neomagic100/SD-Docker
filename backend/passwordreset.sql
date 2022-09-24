@@ -1,0 +1,10 @@
+CREATE USER IF NOT EXISTS mike@localhost IDENTIFIED BY 'secret';
+SET PASSWORD FOR mike@localhost = PASSWORD('secret');
+GRANT ALL ON *.* TO mike@localhost WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS mike@'%' IDENTIFIED BY 'secret';
+SET PASSWORD FOR mike@'%' = PASSWORD('secret');
+GRANT ALL ON *.* TO mike@'%' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS mike@'%' IDENTIFIED BY 'secret';
+SET PASSWORD FOR mike@'%' = PASSWORD('secret');
+CREATE DATABASE IF NOT EXISTS localdb;
+GRANT ALL ON localdb.* TO mike@'%';
