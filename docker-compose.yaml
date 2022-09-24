@@ -1,11 +1,17 @@
 version: '3.8'
 services:
   mariadb:
-    image: mariadb:latest
+    build:
+      context: ./
+      dockerfile: dockerfiles/mariadb.dockerfile
     volumes:
       - datadir:/var/lib/mysql
     env_file:
       - ./env/mariadb.env
+    depends_on:
+      - backend
+    ports:
+      - 3306:3306
   backend:
     image: node:latest
     volumes:
@@ -17,11 +23,22 @@ services:
       - MARIADB_USERNAME=mike
       - MARIADB_PASSWORD=secret
   npm:
-    build: ./dockerfiles/npm.dockerfile
+    build: 
+      context: ./
+      dockerfile: dockerfiles/npm.dockerfile
     stdin_open: true
     tty: true
     volumes:
       - ./:/app
+  nodeutil:
+    build:
+      context: ./
+      dockerfile: dockerfiles/nodeutil.dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+
 volumes:
   datadir:
   logs:
