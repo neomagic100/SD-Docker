@@ -16,6 +16,12 @@ services:
     environment:
       - MARIADB_USERNAME=mike
       - MARIADB_PASSWORD=secret
+  npm:
+    build: ./dockerfiles/npm.dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
 volumes:
   datadir:
   logs:
